@@ -19,7 +19,7 @@ blocks:
         machine:
           type: e1-standard-2
           os_image: ubuntu2004
-  - name: 'Block #2'
+  - name: Test
     task:
       env_vars:
         - name: NODE_ENV
