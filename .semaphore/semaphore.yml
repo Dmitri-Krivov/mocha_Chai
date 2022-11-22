@@ -8,7 +8,7 @@ blocks:
   - name: npm install
     task:
       jobs:
-        - name: ''
+        - name: Install npm
           commands:
             - checkout
             - sem-version node 12
@@ -34,3 +34,7 @@ blocks:
           commands:
             - node app/server.js &
             - npm test
+      agent:
+        machine:
+          type: e1-standard-2
+          os_image: ubuntu2004
