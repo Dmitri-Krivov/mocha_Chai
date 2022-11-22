@@ -5,20 +5,32 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: TestMyApp_Mocha
+  - name: npm install
     task:
       jobs:
-        - name: Test1
+        - name: ''
           commands:
             - checkout
             - sem-version node 12
             - cache restore
             - npm install
             - cache store
-            - npm run build --if-present
-            - node app/server.js &
-            - npm test
       agent:
         machine:
           type: e1-standard-2
           os_image: ubuntu2004
+  - name: 'Block #2'
+    task:
+      env_vars:
+        - name: NODE_ENV
+          value: test
+      prologue:
+        commands:
+          - checkout
+          - sem-version node 12
+          - cache restore
+      jobs:
+        - name: mocha
+          commands:
+            - node app/server.js &
+            - npm test
